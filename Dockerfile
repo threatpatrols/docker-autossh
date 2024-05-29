@@ -10,7 +10,7 @@ LABEL source="https://github.com/threatpatrols/docker-autossh"
 RUN \
     apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y autossh iproute2 && \
+    apt-get install -y autossh iproute2 iputils-ping && \
     \
     apt-get clean && \
     apt-get autoremove -y
