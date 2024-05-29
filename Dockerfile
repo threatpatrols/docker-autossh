@@ -1,6 +1,6 @@
 
 # https://hub.docker.com/_/debian/tags
-FROM debian:stable
+FROM debian:stable-slim
 
 # Hello
 LABEL maintainer="Nicholas de Jong <ndejong@threatpatrols.com>"
@@ -10,12 +10,10 @@ LABEL source="https://github.com/threatpatrols/docker-autossh"
 RUN \
     apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y autossh && \
+    apt-get install -y autossh iproute2 && \
     \
     apt-get clean && \
     apt-get autoremove -y
 
-# run as non-privileged user
-USER 65534
-
-ENTRYPOINT ["autossh"]
+COPY entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]

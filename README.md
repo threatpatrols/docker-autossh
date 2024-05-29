@@ -1,15 +1,22 @@
-# Plain olde Autossh
-
-Dead simple, nothing special, just `autossh` from the Debian apt packages
-
+# Autossh With Pre-command Injection
 
 ## Usage
+
+Env-vars with prefix `PRE_COMMAND` are sorted and used to inject commands before autossh is invoked.
+
+NB: you'll need to be _really_ sure you want to inject arbitrary shell commands like this!
+
+
 ```shell
-docker run --rm -it threatpatrols/autossh
+docker run \
+  --cap-add=NET_ADMIN \
+  -e PRE_COMMAND_02='ip route show' \
+  -e PRE_COMMAND_01='ip route add 10.10.10.0/24 via 172.17.10.1' \
+  threatpatrols/autossh -T user@10.10.10.10
 ```
 
 ## Source / Repo
-* source: https://github.com/ndejong/docker-autossh
+* source: https://github.com/threatpatrols/docker-autossh
 * repo: https://hub.docker.com/r/threatpatrols/autossh
 
 ## AutoSSH Project
