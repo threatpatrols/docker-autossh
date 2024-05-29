@@ -13,7 +13,8 @@ RUN \
     apt-get install -y autossh iproute2 iputils-ping && \
     \
     apt-get clean && \
-    apt-get autoremove -y
+    apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
