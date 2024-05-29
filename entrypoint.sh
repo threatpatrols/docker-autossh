@@ -10,7 +10,7 @@ while IFS= read -r pre_command_exec || [[ -n $pre_command_exec ]]; do
     else
       echo "PRE_COMMAND: >> ${pre_command_exec}"
     fi
-    ${pre_command_exec}
+    bash -c "${pre_command_exec}"
     echo "==="
   fi
 done < <(printf '%s' "$(env | sort | grep ^PRE_COMMAND | cut -d'=' -f2-)")
